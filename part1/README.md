@@ -1,64 +1,24 @@
-# High-Level Package Diagram – HBnB
+# High-Level Package Diagram
 
-This diagram illustrates the high-level layered architecture of the HBnB application,
-showing how the Presentation, Business Logic, and Persistence layers interact using
-the Facade Pattern.
-
-## Architecture Overview
+This diagram illustrates the high-level layered architecture of the HBnB application.
+It shows how the Presentation, Business Logic, and Persistence layers interact using
+the Facade pattern.
 
 ```mermaid
-classDiagram
-direction LR
+flowchart LR
+    Presentation[Presentation Layer]
+    Business[Business Logic Layer<br/>Facade]
+    Persistence[Persistence Layer]
 
-namespace Presentation_Layer {
-  class API {
-    +routes
-    +request/response
-  }
+    Presentation --> Business
+    Business --> Persistence
 
-  class Controllers {
-    +handle_requests()
-  }
-}
+Explanation
 
-namespace Business_Logic_Layer {
-  class Facade {
-    +create_user()
-    +create_place()
-    +list_places()
-    +create_review()
-  }
+The Presentation layer handles client requests and communicates with the Business
+Logic layer through a Facade.
 
-  class Services {
-    +validation()
-    +business_rules()
-  }
+The Business Logic layer contains the core application logic and coordinates
+interactions with the Persistence layer.
 
-  class Models {
-    +User
-    +Place
-    +Review
-    +Amenity
-  }
-}
-
-namespace Persistence_Layer {
-  class Repositories {
-    +save()
-    +get_by_id()
-    +list()
-    +delete()
-  }
-
-  class Database {
-    +connection
-    +tables
-  }
-}
-
-Presentation_Layer.API --> Presentation_Layer.Controllers
-Presentation_Layer.Controllers --> Business_Logic_Layer.Facade : calls
-Business_Logic_Layer.Facade --> Business_Logic_Layer.Services : orchestrates
-Business_Logic_Layer.Services --> Business_Logic_Layer.Models : uses
-Business_Logic_Layer.Facade --> Persistence_Layer.Repositories : data access
-Persistence_Layer.Repositories --> Persistence_Layer.Database : CRUD
+The Persistence layer is responsible for data storage and retrieval.
