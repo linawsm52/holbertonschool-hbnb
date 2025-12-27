@@ -39,9 +39,31 @@ The application follows a **three-layer architecture**:
 - Scalability and modularity  
 
 ### 2.b High-Level Package Diagram
-*(High-Level Package Diagram here)*  
+![High-Level Package Diagram](High-Level-Package-Diagram.png)
 
-**Notes:**  
+### Purpose
+This high-level package diagram provides an overview of the HBnB system architecture.  
+It illustrates how the application is structured into layers and how responsibilities are separated to ensure maintainability and scalability.
+
+### Why This Diagram Is Important
+- Helps understand the overall system structure before diving into implementation.
+- Clearly separates concerns between presentation, business logic, and data persistence.
+- Simplifies communication between layers by enforcing architectural boundaries.
+- Serves as a reference for future development and team collaboration.
+
+### How It Works
+1. The **Presentation Layer** receives client requests through API endpoints.
+2. Requests are forwarded to the **Business Logic Layer** via the `HBnBFacade`.
+3. The facade delegates operations to the appropriate service.
+4. Services interact with repositories in the **Persistence Layer**.
+5. Repositories handle data storage and retrieval from the database.
+6. Results are returned back through the same flow to the client.
+
+### Notes
+- The Facade pattern is used to provide a single entry point between the Presentation and Business Logic layers.
+- The Business Logic layer does not directly access the database.
+- All database interactions are handled exclusively by the Persistence layer.
+
  
 
 ---
