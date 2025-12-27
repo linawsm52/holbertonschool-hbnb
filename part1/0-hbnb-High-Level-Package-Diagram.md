@@ -68,5 +68,5 @@ Used to simplify communication between the Presentation Layer and the Business L
 
 ## Package Diagram
 
-![High-Level Package Diagram](High-Level%20Package%20Diagram.png)
+<img width="1536" height="1024" alt="High-Level Package Diagram" src="https://github.com/user-attachments/assets/8b22fa8b-8c89-4bbc-b319-b9dd1c568aff" />
 
