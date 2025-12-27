@@ -39,7 +39,7 @@ The application follows a **three-layer architecture**:
 - Scalability and modularity  
 
 ### 2.b High-Level Package Diagram
-![Uploading High-Level Package Diagram.png…]()
+<img width="1536" height="1024" alt="High-Level Package Diagram" src="https://github.com/user-attachments/assets/853fba1a-6765-4e11-aff6-d05b96ac0c33" />
 
 ### Purpose
 This high-level package diagram provides an overview of the HBnB system architecture.  
