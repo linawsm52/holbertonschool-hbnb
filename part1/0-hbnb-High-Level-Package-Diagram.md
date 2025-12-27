@@ -65,3 +65,7 @@ Repositories abstract database access from the business logic.
 
 - Facade Pattern  
 Used to simplify communication between the Presentation Layer and the Business Logic Layer by exposing a unified interface.
+
+## Package Diagram
+
+![High-Level Package Diagram](High-Level-Package-Diagram.png)
