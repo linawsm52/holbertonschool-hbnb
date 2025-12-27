@@ -35,4 +35,4 @@ Focuses on documenting the architecture and design of the HBnB Evolution applica
 ## Authors
 - Lina Alduaylij — [@linawsm52](https://github.com/linawsm52)
 - Ghaida Almutairi — [@GhaidaAl36](https://github.com/GhaidaAl36)
-- Alanoud Naif
+- Alanoud Naif - [@alanooud1983-bot](https://github.com/alanooud1983-bot)
