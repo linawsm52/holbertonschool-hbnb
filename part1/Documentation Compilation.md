@@ -78,12 +78,12 @@ This layer contains the core business models and rules for managing **users, pla
 - **Review:** Stores feedback and ratings for places.  
 - **Amenity:** Represents features available at places.
 
-*<img width="842" height="617" alt="لقطة شاشة 2025-12-22 143549" src="https://github.com/user-attachments/assets/ef49d6c9-c370-4ce8-964c-d6e25214cacb" />
-* 
+<img width="842" height="617" alt="لقطة شاشة 2025-12-22 143549" src="https://github.com/user-attachments/assets/ef49d6c9-c370-4ce8-964c-d6e25214cacb" />
+ 
 
 
 
-**Notes:**  
+### Notes  
  ### Relationships
 | Relationship | Description |
 |--------------|-------------|
@@ -96,9 +96,9 @@ This layer contains the core business models and rules for managing **users, pla
 
 ## 4. API Interaction Flow
 
-<img width="1232" height="1302" alt="user_registration" src="https://github.com/user-attachments/assets/df60cff6-bdc6-4f72-8dac-12447b0d7384" />
+### 1. User Registration
 
-1. User Registration
+<img width="1232" height="1302" alt="user_registration" src="https://github.com/user-attachments/assets/df60cff6-bdc6-4f72-8dac-12447b0d7384" />
 
 Describes the process of registering a new user.
 
@@ -110,9 +110,10 @@ User data is saved in the database.
 
 A successful response (201 Created) is returned to the user.
 
-<img width="1212" height="802" alt="place_creation" src="https://github.com/user-attachments/assets/dcb5f63d-ef16-4eae-bf97-48eedf1db9f3" />
  
-2. Place Creation
+### 2. Place Creation
+
+<img width="1212" height="802" alt="place_creation" src="https://github.com/user-attachments/assets/dcb5f63d-ef16-4eae-bf97-48eedf1db9f3" />
 
 Describes the creation of a new place.
 
@@ -123,10 +124,11 @@ The service validates place data.
 Place data is stored in the database.
 
 A success response (201 Created) is returned.
- 
+
+
+### 3. Review Submission
+
 <img width="1242" height="802" alt="review_submission" src="https://github.com/user-attachments/assets/91a89f41-2d1f-40f8-a686-241b44f5fc95" />
- 
-3. Review Submission
 
 Describes submitting a review for a place.
 
@@ -137,10 +139,11 @@ The service validates the review data.
 The review is saved in the database.
 
 A Success response is returned to the user.
-  
+
+
+### 4. Fetching a List of Places
+
 <img width="1272" height="822" alt="fetch_places" src="https://github.com/user-attachments/assets/80025aa1-1d15-4563-aeaa-2f826eeaf2a4" />
- 
-4. Fetching a List of Places
 
 Describes fetching a list of places.
 
@@ -150,10 +153,12 @@ The service fetches data from the database.
 
 A list of places is returned to the user.  
 
-**Notes**
-Each diagram shows the interaction flow between system layers:
+### Notes
+-Each diagram shows the interaction flow between system layers:
+
 User → API → Service → Database
-The diagrams focus on request flow rather than implementation details.
+
+-The diagrams focus on request flow rather than implementation details.
+
 ---
 
-  
