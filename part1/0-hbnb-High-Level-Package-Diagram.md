@@ -1,14 +1,42 @@
-# High-Level Package Diagram
+@startuml
+skinparam packageStyle rectangle
+left to right direction
 
-This diagram represents the high-level layered architecture of the HBnB application.
-The Presentation layer communicates with the Business Logic layer through a Facade,
-which coordinates interactions with the Persistence layer.
+package "Presentation Layer" {
+  class APIController
+}
 
-```mermaid
-flowchart LR
-    Presentation[Presentation Layer]
-    Business[Business Logic Layer<br/>Facade]
-    Persistence[Persistence Layer]
+package "Business Logic Layer" {
+  class HBnBFacade
+  class UserService
+  class PlaceService
+  class ReviewService
+  class AmenityService
+}
 
-    Presentation --> Business
-    Business --> Persistence
+package "Persistence Layer" {
+  class UserRepository
+  class PlaceRepository
+  class ReviewRepository
+  class AmenityRepository
+  class Database
+}
+
+APIController ..> HBnBFacade : uses (Facade)
+
+HBnBFacade ..> UserService
+HBnBFacade ..> PlaceService
+HBnBFacade ..> ReviewService
+HBnBFacade ..> AmenityService
+
+UserService ..> UserRepository
+PlaceService ..> PlaceRepository
+ReviewService ..> ReviewRepository
+AmenityService ..> AmenityRepository
+
+UserRepository ..> Database
+PlaceRepository ..> Database
+ReviewRepository ..> Database
+AmenityRepository ..> Database
+
+@enduml
