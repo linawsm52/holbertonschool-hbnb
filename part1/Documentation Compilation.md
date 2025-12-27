@@ -150,6 +150,10 @@ The service fetches data from the database.
 
 A list of places is returned to the user.  
 
+**Notes**
+Each diagram shows the interaction flow between system layers:
+User → API → Service → Database
+The diagrams focus on request flow rather than implementation details.
 ---
 
   
