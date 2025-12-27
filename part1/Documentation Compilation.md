@@ -47,11 +47,28 @@ The application follows a **three-layer architecture**:
 ---
 
 ## 3. Business Logic Layer
+### Class Diagram
+This layer contains the core business models and rules for managing **users, places, reviews, and amenities**. 
 
-*(Class Diagram here)*  
+### Key Entities
+- **User:** Represents system users.
+- **Place:** Represents properties.  
+- **Review:** Stores feedback and ratings for places.  
+- **Amenity:** Represents features available at places.
+
+*<img width="842" height="617" alt="لقطة شاشة 2025-12-22 143549" src="https://github.com/user-attachments/assets/ef49d6c9-c370-4ce8-964c-d6e25214cacb" />
+* 
+
+
 
 **Notes:**  
- 
+ ### Relationships
+| Relationship | Description |
+|--------------|-------------|
+| User 1 --- * Place | A user can own multiple places |
+| User 1 --- * Review | A user can write multiple reviews |
+| Place 1 --- * Review | A place can have multiple reviews |
+| Place * --- * Amenity | Many-to-many; a place can have multiple amenities |
 
 ---
 
