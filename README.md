@@ -33,6 +33,6 @@ Focuses on documenting the architecture and design of the HBnB Evolution applica
 - UML 
 
 ## Authors
-- Lina Alduaylij — @linawsm52  
-- Ghaida Almutairi — @GhaidaAl36  
+- Lina Alduaylij — [@linawsm52](https://github.com/linawsm52)
+- Ghaida Almutairi — [@GhaidaAl36](https://github.com/GhaidaAl36)
 - Alanoud Naif
