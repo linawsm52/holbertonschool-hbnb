@@ -57,7 +57,7 @@ It illustrates how the application is structured into layers and how responsibil
 3. The facade delegates operations to the appropriate service.
 4. Services interact with repositories in the **Persistence Layer**.
 5. Repositories handle data storage and retrieval from the database.
-6. Results are returned back through the same flow to the client.
+6. Results are returned through the same flow to the client.
 
 ### Notes
 - The Facade pattern is used to provide a single entry point between the Presentation and Business Logic layers.
@@ -96,20 +96,59 @@ This layer contains the core business models and rules for managing **users, pla
 
 ## 4. API Interaction Flow
 
-*(Sequence Diagrams 1 here)*  
+<img width="1232" height="1302" alt="user_registration" src="https://github.com/user-attachments/assets/df60cff6-bdc6-4f72-8dac-12447b0d7384" />
 
-**Notes:**  
+1. User Registration
 
-*(Sequence Diagrams 2 here)*  
+Describes the process of registering a new user.
 
-**Notes:**  
-*(Sequence Diagrams 3 here)*  
+The user sends a request to the API.
 
-**Notes:**  
-*(Sequence Diagrams 4 here)*  
+The service validates the user data.
 
-**Notes:**  
+User data is saved in the database.
 
+A successful response (201 Created) is returned to the user.
+
+<img width="1212" height="802" alt="place_creation" src="https://github.com/user-attachments/assets/dcb5f63d-ef16-4eae-bf97-48eedf1db9f3" />
+ 
+2. Place Creation
+
+Describes the creation of a new place.
+
+The user sends a create place request to the API.
+
+The service validates place data.
+
+Place data is stored in the database.
+
+A success response (201 Created) is returned.
+ 
+<img width="1242" height="802" alt="review_submission" src="https://github.com/user-attachments/assets/91a89f41-2d1f-40f8-a686-241b44f5fc95" />
+ 
+3. Review Submission
+
+Describes submitting a review for a place.
+
+The user sends a review request through the API.
+
+The service validates the review data.
+
+The review is saved in the database.
+
+A Success response is returned to the user.
+  
+<img width="1272" height="822" alt="fetch_places" src="https://github.com/user-attachments/assets/80025aa1-1d15-4563-aeaa-2f826eeaf2a4" />
+ 
+4. Fetching a List of Places
+
+Describes fetching a list of places.
+
+The user sends a request to retrieve places.
+
+The service fetches data from the database.
+
+A list of places is returned to the user.  
 
 ---
 
