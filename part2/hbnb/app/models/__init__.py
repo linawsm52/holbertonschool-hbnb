@@ -5,4 +5,3 @@ from .place import Place
 from .review import Review
 
 __all__ = ["BaseModel", "User", "Amenity", "Place", "Review"]
-
