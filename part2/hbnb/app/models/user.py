@@ -1,42 +1,33 @@
-from __future__ import annotations
-
-from dataclasses import dataclass
+import re  # used for validation
 from .base_model import BaseModel
 
-
-def _require_str(field_name: str, value: str, max_len: int | None = None) -> None:
-    if not isinstance(value, str) or not value.strip():
-        raise ValueError(f"{field_name} must be a non-empty string")
-    if max_len is not None and len(value) > max_len:
-        raise ValueError(f"{field_name} must be at most {max_len} characters")
-
-
-@dataclass
 class User(BaseModel):
-    first_name: str = ""
-    last_name: str = ""
-    email: str = ""
-    password: str = ""
+    def __init__(self, first_name, last_name, email, is_admin=False):
+        super().__init__()
 
-    def __post_init__(self) -> None:
-        _require_str("email", self.email, 128)
+        # Validate first and last name
+        self._validate_name(first_name, "first_name")
+        self._validate_name(last_name, "last_name")
 
-    def update(self, **kwargs) -> None:
-        allowed = {"first_name", "last_name", "email", "password"}
-        for k in list(kwargs.keys()):
-            if k not in allowed:
-                kwargs.pop(k)
+        # Validate email format
+        self._validate_email(email)
 
-        if "email" in kwargs:
-            _require_str("email", kwargs["email"], 128)
+        # Assign attributes
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email = email
+        self.is_admin = is_admin
 
-        super().update(**kwargs)
+        # Relationship: a user can own multiple places
+        self.places = []
 
-    def to_dict(self) -> dict:
-        d = super().to_dict()
-        d.update({
-            "first_name": self.first_name,
-            "last_name": self.last_name,
-            "email": self.email,
-        })
-        return d
+    def _validate_name(self, value, field):
+        """Check required and max 50 characters"""
+        if not value or len(value) > 50:
+            raise ValueError(f"{field} is required and max 50 characters")
+
+    def _validate_email(self, email):
+        """Validate standard email format"""
+        pattern = r"^[\w\.-]+@[\w\.-]+\.\w+$"
+        if not re.match(pattern, email):
+            raise ValueError("Invalid email format")

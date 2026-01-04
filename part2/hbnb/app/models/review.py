@@ -1,43 +1,30 @@
-from __future__ import annotations
-
-from dataclasses import dataclass
 from .base_model import BaseModel
+from .user import User
+from .place import Place
 
-
-def _require_str(field_name: str, value: str, max_len: int | None = None) -> None:
-    if not isinstance(value, str) or not value.strip():
-        raise ValueError(f"{field_name} must be a non-empty string")
-    if max_len is not None and len(value) > max_len:
-        raise ValueError(f"{field_name} must be at most {max_len} characters")
-
-
-@dataclass
 class Review(BaseModel):
-    text: str = ""
-    user_id: str = ""
-    place_id: str = ""
+    def __init__(self, text, rating, place, user):
+        super().__init__()
 
-    def __post_init__(self) -> None:
-        _require_str("text", self.text, 500)
-        _require_str("user_id", self.user_id, 64)
-        _require_str("place_id", self.place_id, 64)
+        """Required string"""
+        if not isinstance(text, str) or not text.strip():
+            raise ValueError("Review text is required")
 
-    def update(self, **kwargs) -> None:
-        allowed = {"text"}
-        for k in list(kwargs.keys()):
-            if k not in allowed:
-                kwargs.pop(k)
+        """must be int between 1 and 5"""
+        if not isinstance(rating, int) or not (1 <= rating <= 5):
+            raise ValueError("Rating must be between 1 and 5")
 
-        if "text" in kwargs:
-            _require_str("text", kwargs["text"], 500)
+        """ensure the place exists"""
+        if not isinstance(place, Place):
+            raise ValueError("place must be a Place instance")
 
-        super().update(**kwargs)
+        """ensure the user exists"""
+        if not isinstance(user, User):
+            raise ValueError("user must be a User instance")
 
-    def to_dict(self) -> dict:
-        d = super().to_dict()
-        d.update({
-            "text": self.text,
-            "user_id": self.user_id,
-            "place_id": self.place_id,
-        })
-        return d
+        self.text = text
+        self.rating = rating
+        self.place = place
+        self.user = user
+
+        place.add_review(self) # to add the review to the place

@@ -1,34 +1,21 @@
-from __future__ import annotations
+import uuid # generate id
+from datetime import datetime # get the current date and time
+"""
+BaseModel is a super class, it contains common attributes
+"""
+class BaseModel: 
+    def __init__(self):
+        self.id = str(uuid.uuid4())
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
 
-from dataclasses import dataclass, field
-from datetime import datetime, timezone
-from uuid import uuid4
+    def save(self):
+        """Update updated_at timestamp"""
+        self.updated_at = datetime.now()
 
-
-def _now() -> datetime:
-    return datetime.now(timezone.utc)
-
-
-@dataclass
-class BaseModel:
-    id: str = field(default_factory=lambda: str(uuid4()))
-    created_at: datetime = field(default_factory=_now)
-    updated_at: datetime = field(default_factory=_now)
-
-    def touch(self) -> None:
-        self.updated_at = _now()
-
-    def to_dict(self) -> dict:
-        return {
-            "id": self.id,
-            "created_at": self.created_at.isoformat(),
-            "updated_at": self.updated_at.isoformat(),
-        }
-
-    def update(self, **kwargs) -> None:
-        for key, value in kwargs.items():
-            if key in ("id", "created_at", "updated_at"):
-                continue
+    def update(self, data: dict):
+        """Update attributes safely"""
+        for key, value in data.items():
             if hasattr(self, key):
                 setattr(self, key, value)
-        self.touch()
+        self.save()
