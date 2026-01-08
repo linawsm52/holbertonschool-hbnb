@@ -6,7 +6,7 @@ from app.services.facade import facade
 
 api = Namespace("places", description="Place operations")
 
-# Output model (what you return)
+# Output model (what we return)
 owner_brief = api.model("OwnerBrief", {
     "id": fields.String,
     "first_name": fields.String,
@@ -31,7 +31,7 @@ place_model = api.model("Place", {
     "amenities": fields.List(fields.Nested(amenity_brief)),
 })
 
-# Input model (what you expect in POST/PUT)
+# Input model (what we expect in POST/PUT)
 place_input = api.model("PlaceInput", {
     "title": fields.String(required=True),
     "description": fields.String,
