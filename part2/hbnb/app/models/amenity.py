@@ -1,11 +1,18 @@
-from .base_model import BaseModel
+from app.models.base_model import BaseModel
+
 
 class Amenity(BaseModel):
     def __init__(self, name):
         super().__init__()
-
-        """must be maximum length of 50 character"""
-        if not name or len(name) > 50:
-            raise ValueError("Amenity name is required and max 50 characters")
-
         self.name = name
+
+    # --- Getter & setter for name ---
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        if not value or not isinstance(value, str) or len(value) > 50:
+            raise ValueError("Name is required and must be under 50 characters")
+        self._name = value

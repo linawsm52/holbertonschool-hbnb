@@ -1,30 +1,33 @@
-from .base_model import BaseModel
-from .user import User
-from .place import Place
+from app.models.base_model import BaseModel
+from app.models.place import Place
+from app.models.user import User
 
 class Review(BaseModel):
-    def __init__(self, text, rating, place, user):
+    def __init__(self, text: str, rating: int, place: Place, user: User):
         super().__init__()
-
-        """Required string"""
         if not isinstance(text, str) or not text.strip():
-            raise ValueError("Review text is required")
-
-        """must be int between 1 and 5"""
-        if not isinstance(rating, int) or not (1 <= rating <= 5):
-            raise ValueError("Rating must be between 1 and 5")
-
-        """ensure the place exists"""
+            raise ValueError("Review text must be a non-empty string")
+            
+        if not isinstance(rating, int) or rating < 1 or rating > 5:
+            raise ValueError("Rating must be an integer between 1 and 5")
+            
         if not isinstance(place, Place):
-            raise ValueError("place must be a Place instance")
-
-        """ensure the user exists"""
+            raise TypeError("place must be a Place instance")
+            
         if not isinstance(user, User):
-            raise ValueError("user must be a User instance")
+            raise TypeError("user must be a User instance")
 
-        self.text = text
+        # Attributes
+        self.text = text.strip()
         self.rating = rating
         self.place = place
         self.user = user
 
-        place.add_review(self) # to add the review to the place
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "text": self.text,
+            "rating": self.rating,
+            "user_id": self.user.id,
+            "place_id": self.place.id
+        }

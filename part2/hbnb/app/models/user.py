@@ -1,33 +1,45 @@
-import re  # used for validation
-from .base_model import BaseModel
+from app.models.base_model import BaseModel
+import re
 
 class User(BaseModel):
     def __init__(self, first_name, last_name, email, is_admin=False):
         super().__init__()
-
-        # Validate first and last name
-        self._validate_name(first_name, "first_name")
-        self._validate_name(last_name, "last_name")
-
-        # Validate email format
-        self._validate_email(email)
-
-        # Assign attributes
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
         self.is_admin = is_admin
-
-        # Relationship: a user can own multiple places
         self.places = []
 
-    def _validate_name(self, value, field):
-        """Check required and max 50 characters"""
-        if not value or len(value) > 50:
-            raise ValueError(f"{field} is required and max 50 characters")
+    # --- Getter & Setter for first_name ---
+    @property
+    def first_name(self):
+        return self._first_name
 
-    def _validate_email(self, email):
-        """Validate standard email format"""
-        pattern = r"^[\w\.-]+@[\w\.-]+\.\w+$"
-        if not re.match(pattern, email):
+    @first_name.setter
+    def first_name(self, value):
+        if not value or len(value) > 50:
+            raise ValueError("First name is required and must be under 50 characters")
+        self._first_name = value
+
+    # --- Getter & Setter for last_name ---
+    @property
+    def last_name(self):
+        return self._last_name
+
+    @last_name.setter
+    def last_name(self, value):
+        if not value or len(value) > 50:
+            raise ValueError("Last name is required and must be under 50 characters")
+        self._last_name = value
+
+    # --- Getter & Setter for email ---
+    @property
+    def email(self):
+        return self._email
+
+    @email.setter
+    def email(self, value):
+        email_regex = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}"
+        if not re.match(email_regex, value):
             raise ValueError("Invalid email format")
+        self._email = value
