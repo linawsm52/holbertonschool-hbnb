@@ -44,24 +44,25 @@ class AmenityList(Resource):
 
 @api.route("/<string:amenity_id>")
 class AmenityItem(Resource):
-    # GET
+
+    @api.marshal_with(amenity_model)
     @api.response(200, "Amenity found")
     @api.response(404, "Amenity not found")
     def get(self, amenity_id):
         """Get amenity by ID"""
         amenity = facade.get_amenity(amenity_id)
         if not amenity:
-            return {"error": "Amenity not found"}, 404
-        return amenity, 200
+            api.abort(404, "Amenity not found")
+        return amenity
 
-    # PUT
+
     @api.expect(amenity_create_model, validate=True)
+    @api.marshal_with(amenity_model)
     @api.response(200, "Amenity updated successfully")
     @api.response(404, "Amenity not found")
-    @api.response(400, "Invalid input")
     def put(self, amenity_id):
         """Update amenity by ID"""
         amenity = facade.update_amenity(amenity_id, request.get_json())
         if not amenity:
-            return {"error": "Amenity not found"}, 404
-        return amenity, 200
+            api.abort(404, "Amenity not found")
+        return amenity
