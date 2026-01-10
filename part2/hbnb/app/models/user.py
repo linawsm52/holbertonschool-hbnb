@@ -1,6 +1,7 @@
 from app.models.base_model import BaseModel
 import re
 
+
 class User(BaseModel):
     def __init__(self, first_name, last_name, email, is_admin=False):
         super().__init__()
@@ -17,6 +18,8 @@ class User(BaseModel):
 
     @first_name.setter
     def first_name(self, value):
+        if value is None:
+            return
         if not value or len(value) > 50:
             raise ValueError("First name is required and must be under 50 characters")
         self._first_name = value
@@ -28,6 +31,8 @@ class User(BaseModel):
 
     @last_name.setter
     def last_name(self, value):
+        if value is None:
+            return
         if not value or len(value) > 50:
             raise ValueError("Last name is required and must be under 50 characters")
         self._last_name = value
@@ -39,6 +44,8 @@ class User(BaseModel):
 
     @email.setter
     def email(self, value):
+        if value is None:
+            return
         email_regex = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}"
         if not re.match(email_regex, value):
             raise ValueError("Invalid email format")
