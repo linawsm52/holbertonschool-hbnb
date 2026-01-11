@@ -4,12 +4,20 @@ from app.services import facade
 
 api = Namespace('reviews', description='Review operations')
 
-# Input validation model
+# ------------------ Models ------------------
+
+# Input validation model (CREATE)
 review_model = api.model('Review', {
     'text': fields.String(required=True, description='Text of the review'),
     'rating': fields.Integer(required=True, description='Rating of the place (1-5)'),
     'user_id': fields.String(required=True, description='ID of the user'),
     'place_id': fields.String(required=True, description='ID of the place')
+})
+
+# Input validation model (UPDATE) - only fields allowed to update
+review_update_model = api.model('ReviewUpdate', {
+    'text': fields.String(required=False, description='Text of the review'),
+    'rating': fields.Integer(required=False, description='Rating of the place (1-5)')
 })
 
 # ------------------ /api/v1/reviews/ ------------------
@@ -44,7 +52,7 @@ class ReviewResource(Resource):
             return {"error": "Review not found"}, 404
         return review.to_dict(), 200
 
-    @api.expect(review_model)
+    @api.expect(review_update_model)
     @api.response(200, 'Review updated successfully')
     @api.response(404, 'Review not found')
     @api.response(400, 'Invalid input data')
@@ -54,7 +62,8 @@ class ReviewResource(Resource):
             review = facade.update_review(review_id, request.json)
             if not review:
                 return {"error": "Review not found"}, 404
-            return {"message": "Review updated successfully"}, 200
+            # Return updated review (more consistent than returning a message)
+            return review.to_dict(), 200
         except ValueError as e:
             return {"error": str(e)}, 400
 
