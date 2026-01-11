@@ -4,6 +4,7 @@ from app.models.place import Place
 from app.models.review import Review
 from app.models.amenity import Amenity
 
+
 class HBnBFacade:
     def __init__(self):
         self.user_repo = InMemoryRepository()
@@ -78,7 +79,6 @@ class HBnBFacade:
         self.place_repo.add(place)
         return place
 
-
     def update_place(self, place_id, place_data):
         place = self.place_repo.get(place_id)
         if not place:
@@ -117,6 +117,14 @@ class HBnBFacade:
                 place.add_amenity(a)
 
         return place
+
+    # ✅ Added: Get one place
+    def get_place(self, place_id):
+        return self.place_repo.get(place_id)
+
+    # ✅ Added: Get all places
+    def get_all_places(self):
+        return self.place_repo.get_all()
 
     # --- Reviews ---
     def create_review(self, review_data):
